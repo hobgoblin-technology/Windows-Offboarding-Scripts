@@ -93,7 +93,8 @@ ForEach-Object {
 # ==============================
 # DISTRIBUTION LIST PERMISSIONS
 # ==============================
- 
+Write-Host "Processing Distribution List permissions..." -ForegroundColor Cyan
+
 Try {
     #Get All Distribution Lists - Excluding Mail enabled security groups
     $DistributionGroups = Get-Distributiongroup -resultsize unlimited |  Where {!$_.GroupType.contains("SecurityEnabled")}
@@ -109,7 +110,7 @@ Try {
                 Write-host "Removed user from group '$Group'" -f Green
             }
             Else{
-                Write-Host -f DarkYellow "[WHAT IF] Would remove '$User' from '$Group'"
+                Write-Host -f DarkYellow "[WHAT IF] Would remove '$User' from '$Group.PrimarySmtpAddress'"
             }
         }
     }
